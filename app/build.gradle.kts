@@ -1,16 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
     namespace = "com.pose_estimation"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.pose_estimation"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -42,14 +43,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
-    packagingOptions {
+    packaging {
         resources {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
-        }
-        jniLibs {
-            useLegacyPackaging = true
-            excludes.add("META-INF/licenses/**")
-            excludes.add("META-INF/AL2.0")
         }
     }
 }
@@ -70,4 +66,17 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // tensorflow lite
+    implementation ("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
+    implementation ("org.tensorflow:tensorflow-lite:2.14.0")
+
+    // CameraX
+    implementation ("androidx.camera:camera-camera2:1.3.1")
+    implementation ("androidx.camera:camera-lifecycle:1.3.1")
+    implementation ("androidx.camera:camera-view:1.3.1")
+
+// Room Database
+    implementation ("androidx.room:room-runtime:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
 }
