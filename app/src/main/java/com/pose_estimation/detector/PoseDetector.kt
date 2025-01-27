@@ -6,7 +6,6 @@ import com.pose_estimation.detector.models.Keypoint
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.support.common.FileUtil
-import org.tensorflow.lite.support.common.ops.NormalizeOp
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
@@ -14,34 +13,40 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 class PoseDetector(context: Context) {
-    private val interpreter: Interpreter
-    private val inputSize = 256 // Tamaño requerido por Thunder
-
+    private lateinit var interpreter: Interpreter
+    private lateinit var inputTensor: ByteBuffer
+    private val inputSize = 256
     init {
-        // Cargar modelo desde assets
-        val model = FileUtil.loadMappedFile(context, "movenet_thunder.tflite")
-        interpreter = Interpreter(model)
+        // Cargar modelo
+        val modelFile = FileUtil.loadMappedFile(context, "movenet_thunder.tflite")
+        interpreter = Interpreter(modelFile)
+
+        // Buffer para UINT8 (3 canales)
+        inputTensor = ByteBuffer.allocateDirect(inputSize * inputSize * 3)
+        inputTensor.order(ByteOrder.nativeOrder())
     }
 
     fun detectPose(bitmap: Bitmap): List<Keypoint> {
-        // 1. Redimensionar y convertir a Float32 (normalizado)
+        // 1. Procesar la imagen a 256x256 y convertirla a TensorImage
         val imageProcessor = ImageProcessor.Builder()
             .add(ResizeOp(inputSize, inputSize, ResizeOp.ResizeMethod.BILINEAR))
-            .add(NormalizeOp(0f, 255f)) // Normalizar de [0,255] a [0,1]
             .build()
-
-        val tensorImage = TensorImage(DataType.FLOAT32)
+        val tensorImage = TensorImage(DataType.UINT8)
         tensorImage.load(bitmap)
         val processedImage = imageProcessor.process(tensorImage)
 
-        // 2. Ejecutar modelo
-        val output = Array(1) { FloatArray(17 * 3) } // 17 keypoints * (y, x, score)
-        interpreter.run(processedImage.buffer, output)
+        // 2. Ejecutar el modelo
+        val outputShape = arrayOf(1, 1, 17, 3)
+        val outputBuffer = Array(outputShape[1]) { Array(outputShape[2]) { FloatArray(outputShape[3]) } }
+        interpreter.run(processedImage.buffer, outputBuffer)
 
-        return parseOutput(output[0])
+        // 3. Procesar los resultados
+        return parseOutput(outputBuffer[0]) // Aquí pasamos el tensor correcto
     }
 
-    private fun parseOutput(output: FloatArray): List<Keypoint> {
+
+    private fun parseOutput(output: Array<FloatArray>): List<Keypoint> {
+        val keypoints = mutableListOf<Keypoint>()
         val bodyParts = listOf(
             "nose", "left_eye", "right_eye", "left_ear", "right_ear",
             "left_shoulder", "right_shoulder", "left_elbow", "right_elbow",
@@ -49,15 +54,23 @@ class PoseDetector(context: Context) {
             "left_knee", "right_knee", "left_ankle", "right_ankle"
         )
 
-        return bodyParts.mapIndexed { index, part ->
-            Keypoint(
-                bodyPart = part,
-                x = output[index * 3 + 1], // X está en la posición 1
-                y = output[index * 3],     // Y está en la posición 0
-                score = output[index * 3 + 2]
+        for (i in bodyParts.indices) {
+            val y = output[i][0] // Coordenada Y normalizada
+            val x = output[i][1] // Coordenada X normalizada
+            val score = output[i][2] // Confianza
+
+            keypoints.add(
+                Keypoint(
+                    bodyPart = bodyParts[i],
+                    x = x,
+                    y = y,
+                    score = score
+                )
             )
         }
+        return keypoints
     }
+
 
     fun close() {
         interpreter.close()
