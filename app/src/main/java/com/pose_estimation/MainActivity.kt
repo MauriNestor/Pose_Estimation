@@ -15,23 +15,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.pose_estimation.detector.PoseDetector
+import com.pose_estimation.ui.CameraScreen
 import com.pose_estimation.ui.theme.Pose_EstimationTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val poseDetector = PoseDetector(applicationContext)
         setContent {
             Pose_EstimationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    CameraScreen(poseDetector) // 🔥 Llamamos a CameraScreen aquí
+
                 }
             }
         }
-        val poseDetector = PoseDetector(applicationContext)
 
         val testBitmap = Bitmap.createScaledBitmap(
             BitmapFactory.decodeResource(resources, R.drawable.test_posture),
@@ -45,18 +44,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Pose_EstimationTheme {
-        Greeting("Android")
-    }
-}
