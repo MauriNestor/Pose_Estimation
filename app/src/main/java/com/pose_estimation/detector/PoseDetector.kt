@@ -16,18 +16,15 @@ class PoseDetector(context: Context) {
     private lateinit var interpreter: Interpreter
     private lateinit var inputTensor: ByteBuffer
     private val inputSize = 256
+
     init {
-        // Cargar modelo
         val modelFile = FileUtil.loadMappedFile(context, "movenet_thunder.tflite")
         interpreter = Interpreter(modelFile)
-
-        // Buffer para UINT8 (3 canales)
         inputTensor = ByteBuffer.allocateDirect(inputSize * inputSize * 3)
         inputTensor.order(ByteOrder.nativeOrder())
     }
 
     fun detectPose(bitmap: Bitmap): List<Keypoint> {
-        // 1. Procesar la imagen a 256x256 y convertirla a TensorImage
         val imageProcessor = ImageProcessor.Builder()
             .add(ResizeOp(inputSize, inputSize, ResizeOp.ResizeMethod.BILINEAR))
             .build()
@@ -35,15 +32,13 @@ class PoseDetector(context: Context) {
         tensorImage.load(bitmap)
         val processedImage = imageProcessor.process(tensorImage)
 
-        // 2. Ejecutar el modelo
         val outputShape = arrayOf(1, 1, 17, 3)
-        val outputBuffer = Array(outputShape[1]) { Array(outputShape[2]) { FloatArray(outputShape[3]) } }
+        val outputBuffer = Array(outputShape[0]) { Array(outputShape[1]) { Array(outputShape[2]) { FloatArray(outputShape[3]) } } }
+
         interpreter.run(processedImage.buffer, outputBuffer)
 
-        // 3. Procesar los resultados
-        return parseOutput(outputBuffer[0]) // Aquí pasamos el tensor correcto
+        return parseOutput(outputBuffer[0][0])
     }
-
 
     private fun parseOutput(output: Array<FloatArray>): List<Keypoint> {
         val keypoints = mutableListOf<Keypoint>()
@@ -55,26 +50,16 @@ class PoseDetector(context: Context) {
         )
 
         for (i in bodyParts.indices) {
-            val y = output[i][0] // Coordenada Y normalizada
-            val x = output[i][1] // Coordenada X normalizada
-            val score = output[i][2] // Confianza
-
-            keypoints.add(
-                Keypoint(
-                    bodyPart = bodyParts[i],
-                    x = x,
-                    y = y,
-                    score = score
-                )
-            )
+            val y = output[i][0]
+            val x = output[i][1]
+            val score = output[i][2]
+            keypoints.add(Keypoint(bodyPart = bodyParts[i], x = x, y = y, score = score))
         }
         return keypoints
     }
-
 
     fun close() {
         interpreter.close()
     }
 }
-
 
