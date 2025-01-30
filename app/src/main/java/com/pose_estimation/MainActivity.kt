@@ -33,7 +33,6 @@ class MainActivity : ComponentActivity() {
         }
         val poseDetector = PoseDetector(applicationContext)
 
-// Probar con una imagen de 256x256
         val testBitmap = Bitmap.createScaledBitmap(
             BitmapFactory.decodeResource(resources, R.drawable.test_posture),
             256, 256, true
