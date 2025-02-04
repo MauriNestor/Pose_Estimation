@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.pose_estimation.detector.PoseDetector
 import com.pose_estimation.ui.CameraScreen
+import com.pose_estimation.ui.ImageSelectorScreen
 import com.pose_estimation.ui.theme.Pose_EstimationTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Pose_EstimationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    CameraScreen(poseDetector) // 🔥 Llamamos a CameraScreen aquí
+                    ImageSelectorScreen(poseDetector)
 
                 }
             }
