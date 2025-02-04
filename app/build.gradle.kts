@@ -83,4 +83,7 @@ dependencies {
     kapt ("androidx.room:room-compiler:2.6.1")
 
     implementation ("com.google.accompanist:accompanist-permissions:0.36.0")
+
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
 }
