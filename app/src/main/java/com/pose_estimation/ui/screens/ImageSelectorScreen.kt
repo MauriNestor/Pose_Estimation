@@ -14,15 +14,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.pose_estimation.detector.PoseDetector
 import com.pose_estimation.detector.models.Keypoint
 import com.pose_estimation.utils.uriToBitmap
 import coil.compose.rememberAsyncImagePainter
-
+import com.pose_estimation.navigation.AppScreens
 
 
 @Composable
-fun ImageSelectorScreen(poseDetector: PoseDetector) {
+fun ImageSelectorScreen(navController: NavController, poseDetector: PoseDetector) {
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     var selectedBitmap by remember { mutableStateOf<Bitmap?>(null) }
     var keypoints by remember { mutableStateOf<List<Keypoint>>(emptyList()) }
@@ -48,6 +49,10 @@ fun ImageSelectorScreen(poseDetector: PoseDetector) {
         }
 
         Spacer(modifier = Modifier.height(16.dp))
+
+        Button(onClick = { navController.navigate(AppScreens.HomeScreen.route) }) {
+            Text("Volver al Inicio")
+        }
 
         imageUri?.let {
             Image(
