@@ -67,6 +67,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    implementation(libs.androidx.navigation.compose)
+
     // tensorflow lite
     implementation ("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
     implementation ("org.tensorflow:tensorflow-lite:2.14.0")
