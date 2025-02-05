@@ -1,4 +1,4 @@
-package com.pose_estimation.ui
+package com.pose_estimation.ui.screens
 
 import android.graphics.Bitmap
 import android.net.Uri
@@ -15,15 +15,17 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.pose_estimation.detector.PoseDetector
 import com.pose_estimation.detector.models.Keypoint
 import com.pose_estimation.utils.uriToBitmap
 import coil.compose.rememberAsyncImagePainter
 import com.pose_estimation.navigation.AppScreens
+import com.pose_estimation.ui.DrawPoseOverlay
 
 
 @Composable
-fun ImageSelectorScreen(navController: NavController, poseDetector: PoseDetector) {
+fun ImageSelectorScreen(navController: NavHostController, poseDetector: PoseDetector) {
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     var selectedBitmap by remember { mutableStateOf<Bitmap?>(null) }
     var keypoints by remember { mutableStateOf<List<Keypoint>>(emptyList()) }
