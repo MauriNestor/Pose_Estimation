@@ -13,7 +13,11 @@ import com.pose_estimation.navigation.AppScreens
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    HomeScreenContent(onNavigate = { navController.navigate(AppScreens.ImageSelectorScreen.route) })
+    AppScaffold {
+        HomeScreenContent(onNavigate = {
+            navController.navigate(AppScreens.ImageSelectorScreen)
+        })
+    }
 }
 
 @Composable
@@ -27,8 +31,8 @@ fun HomeScreenContent(onNavigate: () -> Unit) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = onNavigate) {
-            Text("Ir a Selección de Imagen")
+        Button(onNavigate) {
+            Text("Ir a ImageSelectorScreen")
         }
     }
 }
