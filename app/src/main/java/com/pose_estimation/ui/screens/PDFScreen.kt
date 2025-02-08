@@ -12,6 +12,18 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun PDFScreen(navController: NavHostController) {
+    AppScaffold {
+        PDFScreenContent()
+    }
+}
+
+@Composable
+fun PDFScreenContent() {
+    PDFContent()
+}
+
+@Composable
+fun PDFContent() {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
