@@ -9,6 +9,8 @@ import com.pose_estimation.detector.PoseDetector
 import com.pose_estimation.ui.screens.ImageSelectorScreen
 import com.pose_estimation.ui.screens.HomeScreen
 import com.pose_estimation.ui.screens.PDFScreen
+import com.pose_estimation.ui.screens.SettingsScreen
+import com.pose_estimation.ui.screens.UserProfileScreen
 
 @Composable
 fun AppNavigation(
@@ -17,28 +19,32 @@ fun AppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = AppScreens.HomeScreen.route
+        startDestination = AppScreens.HomeScreen
     ){
         home(navController = navController)
-        imageSelector(navController, poseDetector)
-        pdfScreen(navController)
-
+        pdfScreen(navController = navController)
+        userProfile(navController = navController)
+        settings(navController = navController)
+        imageSelector(navController = navController, poseDetector)
     }
 }
 
-private fun NavGraphBuilder.home(navController: NavHostController){
-    composable(AppScreens.HomeScreen.route) {
-        HomeScreen(navController)
-    }
+private fun NavGraphBuilder.home(navController: NavHostController) {
+    composable<AppScreens.HomeScreen> { HomeScreen(navController) }
+}
+
+private fun NavGraphBuilder.userProfile(navController: NavHostController) {
+    composable<AppScreens.UserProfileScreen> { UserProfileScreen() }
+}
+
+private fun NavGraphBuilder.settings(navController: NavHostController) {
+    composable<AppScreens.SettingsScreen> { SettingsScreen(navController) }
+}
+
+private fun NavGraphBuilder.pdfScreen(navController: NavHostController) {
+    composable<AppScreens.PDFScreen> { PDFScreen(navController) }
 }
 
 private fun NavGraphBuilder.imageSelector(navController: NavHostController, poseDetector: PoseDetector) {
-    composable(AppScreens.ImageSelectorScreen.route) {
-        ImageSelectorScreen(navController, poseDetector)
-    }
-}
-private fun NavGraphBuilder.pdfScreen(navController: NavHostController) {
-    composable(AppScreens.PDFScreen.route) {
-        PDFScreen(navController)
-    }
+    composable<AppScreens.ImageSelectorScreen> { ImageSelectorScreen(navController, poseDetector) }
 }
