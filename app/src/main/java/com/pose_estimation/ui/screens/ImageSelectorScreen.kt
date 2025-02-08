@@ -23,9 +23,16 @@ import coil.compose.rememberAsyncImagePainter
 import com.pose_estimation.navigation.AppScreens
 import com.pose_estimation.ui.DrawPoseOverlay
 
-
 @Composable
 fun ImageSelectorScreen(navController: NavHostController, poseDetector: PoseDetector) {
+    AppScaffold {
+        ImageSelectorScreenContent(navController, poseDetector)
+    }
+
+}
+
+@Composable
+fun ImageSelectorScreenContent(navController: NavHostController, poseDetector: PoseDetector) {
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     var selectedBitmap by remember { mutableStateOf<Bitmap?>(null) }
     var keypoints by remember { mutableStateOf<List<Keypoint>>(emptyList()) }
@@ -41,20 +48,31 @@ fun ImageSelectorScreen(navController: NavHostController, poseDetector: PoseDete
         }
     }
 
+    ImageSelectorContent(
+        imageUri = imageUri,
+        selectedBitmap = selectedBitmap,
+        keypoints = keypoints,
+        onImagePick = { imagePickerLauncher.launch("image/*") }
+    )
+}
+
+@Composable
+fun ImageSelectorContent(
+    imageUri: Uri?,
+    selectedBitmap: Bitmap?,
+    keypoints: List<Keypoint>,
+    onImagePick: () -> Unit
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Button(onClick = { imagePickerLauncher.launch("image/*") }) {
+        Button(onClick = onImagePick) {
             Text("Seleccionar Imagen")
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = { navController.navigate(AppScreens.HomeScreen.route) }) {
-            Text("Volver al Inicio")
-        }
 
         imageUri?.let {
             Image(
