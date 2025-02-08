@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
     id("org.jetbrains.kotlin.kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -87,5 +89,7 @@ dependencies {
     implementation ("com.google.accompanist:accompanist-permissions:0.36.0")
 
     implementation("io.coil-kt:coil-compose:2.4.0")
+
+    implementation(libs.kotlinx.serialization.json)
 
 }
