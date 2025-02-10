@@ -25,7 +25,7 @@ import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.pose_estimation.detector.PoseDetector
 import com.pose_estimation.detector.models.Keypoint
-import com.pose_estimation.ui.DrawPoseOverlay
+import com.pose_estimation.utils.DrawPoseOverlay
 import com.pose_estimation.utils.imageProxyToBitmap
 import java.util.concurrent.Executors
 
