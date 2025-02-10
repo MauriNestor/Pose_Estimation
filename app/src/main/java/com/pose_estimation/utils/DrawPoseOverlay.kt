@@ -1,4 +1,4 @@
-package com.pose_estimation.ui
+package com.pose_estimation.utils
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
