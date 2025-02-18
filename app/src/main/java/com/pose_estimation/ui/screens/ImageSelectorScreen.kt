@@ -57,20 +57,27 @@ fun ImageSelectorScreenContent(navController: NavHostController, poseDetector: P
             keypoints = poseDetector.detectPose(bitmap)
         }
     }
+    val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
+        bitmap?.let {
+            selectedBitmap = it
+            keypoints = poseDetector.detectPose(it)
+        }
+    }
 
     ImageSelectorContent(
-        imageUri = imageUri,
         selectedBitmap = selectedBitmap,
         keypoints = keypoints,
-        onImagePick = { imagePickerLauncher.launch("image/*") }
+        onImagePick = { imagePickerLauncher.launch("image/*") },
+        onTakePhoto = { cameraLauncher.launch(null) } // Activar la cámara
     )
 }
 @Composable
 fun ImageSelectorContent(
-    imageUri: Uri?,
     selectedBitmap: Bitmap?,
     keypoints: List<Keypoint>,
-    onImagePick: () -> Unit
+    onImagePick: () -> Unit,
+    onTakePhoto: () -> Unit
+
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -82,6 +89,10 @@ fun ImageSelectorContent(
         }
 
         Spacer(modifier = Modifier.height(16.dp))
+
+        Button(onClick = onTakePhoto) {
+            Text("Tomar Foto")
+        }
 
         selectedBitmap?.let { bitmap ->
             Box(modifier = Modifier.fillMaxWidth()) {
