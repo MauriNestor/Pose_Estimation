@@ -1,6 +1,7 @@
 package com.pose_estimation.ui.screens
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
@@ -26,7 +27,7 @@ fun BottomNavigationBar(navController: NavHostController) {
 
     val screenIcons = mapOf(
         AppScreens.HomeScreen to Icons.Filled.Home,
-        AppScreens.PDFScreen to Icons.Filled.Add,
+        AppScreens.PDFScreen to Icons.Filled.AccountBox,
         AppScreens.SettingsScreen to Icons.Filled.Settings,
         AppScreens.UserProfileScreen to Icons.Filled.Person
     )
@@ -64,7 +65,7 @@ fun BottomNavigationBarPreview() {
         NavigationBar {
             listOf(
                 Icons.Filled.Home to "Inicio",
-                Icons.Filled.Add to "Archivos",
+                Icons.Filled.AccountBox to "Archivos",
                 Icons.Filled.Settings to "Ajustes",
                 Icons.Filled.Person to "Perfil"
             ).forEach { (icon, label) ->

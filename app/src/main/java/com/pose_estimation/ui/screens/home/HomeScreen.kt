@@ -1,4 +1,4 @@
-package com.pose_estimation.ui.screens
+package com.pose_estimation.ui.screens.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.pose_estimation.navigation.AppScreens
+import com.pose_estimation.ui.screens.AppScaffold
 
 @Composable
 fun HomeScreen(navController: NavHostController) {

@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.pose_estimation.detector.PoseDetector
 import com.pose_estimation.ui.screens.ImageSelectorScreen
-import com.pose_estimation.ui.screens.HomeScreen
+import com.pose_estimation.ui.screens.home.HomeScreen
 import com.pose_estimation.ui.screens.PDFScreen
 import com.pose_estimation.ui.screens.SettingsScreen
 import com.pose_estimation.ui.screens.UserProfileScreen
