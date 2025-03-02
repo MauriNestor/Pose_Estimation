@@ -72,23 +72,23 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     // tensorflow lite
-    implementation ("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
-    implementation ("org.tensorflow:tensorflow-lite:2.14.0")
+    implementation (libs.tensorflow.lite.task.vision)
+    implementation (libs.tensorflow.lite)
 
     // CameraX
-    implementation ("androidx.camera:camera-camera2:1.3.0")
-    implementation ("androidx.camera:camera-lifecycle:1.3.0")
-    implementation ("androidx.camera:camera-view:1.3.0")
-    implementation("androidx.camera:camera-extensions:1.3.0")  // Extensiones opcionales
+    implementation (libs.androidx.camera.camera2)
+    implementation (libs.androidx.camera.lifecycle)
+    implementation (libs.androidx.camera.view)
+    implementation(libs.androidx.camera.extensions)
 
 
 // Room Database
-    implementation ("androidx.room:room-runtime:2.6.1")
-    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation (libs.androidx.room.runtime)
+    kapt (libs.androidx.room.compiler)
 
-    implementation ("com.google.accompanist:accompanist-permissions:0.36.0")
+    implementation (libs.accompanist.permissions)
 
-    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation(libs.coil.compose)
 
     implementation(libs.kotlinx.serialization.json)
 
