@@ -13,13 +13,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-//        val testBitmap = Bitmap.createScaledBitmap(
-//            BitmapFactory.decodeResource(resources, R.drawable.test_posture),
-//            256, 256, true
-//        )
-//
-//        val keypoints = poseDetector.detectPose(testBitmap)
-//        keypoints.forEach {
-//            Log.d("PoseDebug", "${it.bodyPart}: (${it.x}, ${it.y}) - Score: ${it.score}")
-//        }

@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
     id("org.jetbrains.kotlin.kapt")
     id("kotlin-parcelize")
 }
@@ -42,6 +44,11 @@ android {
     buildFeatures {
         compose = true
     }
+    applicationVariants.forEach { variant ->
+        variant.sourceSets.forEach {
+            it.javaDirectories += files("build/generated/ksp/${variant.name}/kotlin")
+        }
+    }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
@@ -61,6 +68,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(project(":data"))
+    implementation(project(":domain"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -80,16 +89,19 @@ dependencies {
     implementation (libs.androidx.camera.lifecycle)
     implementation (libs.androidx.camera.view)
     implementation(libs.androidx.camera.extensions)
-
-
 // Room Database
     implementation (libs.androidx.room.runtime)
     kapt (libs.androidx.room.compiler)
-
+//permission
     implementation (libs.accompanist.permissions)
-
+// manejo de images
     implementation(libs.coil.compose)
-
+// serialization
     implementation(libs.kotlinx.serialization.json)
+// koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.annotations)
+    ksp(libs.koin.ksp.compiler)
 
 }
