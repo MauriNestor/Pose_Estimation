@@ -1,9 +1,8 @@
-package com.pose_estimation
+package com.pose_estimation.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.pose_estimation.ui.PoseApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

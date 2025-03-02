@@ -1,4 +1,4 @@
-package com.pose_estimation.navigation
+package com.pose_estimation.ui.navigation
 
 import kotlinx.serialization.Serializable
 

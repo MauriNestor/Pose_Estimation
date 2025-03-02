@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.pose_estimation.navigation.AppScreens
+import com.pose_estimation.ui.navigation.AppScreens
 import com.pose_estimation.ui.screens.AppScaffold
 
 @Composable
