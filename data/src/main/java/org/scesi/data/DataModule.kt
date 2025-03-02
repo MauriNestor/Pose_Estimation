@@ -1,4 +1,4 @@
 package org.scesi.data
 
-class dataExample {
+class DataModule {
 }

@@ -23,4 +23,3 @@ rootProject.name = "Pose_Estimation"
 include(":app")
 include(":data")
 include(":domain")
-include(":usesCases")
