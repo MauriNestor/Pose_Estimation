@@ -5,5 +5,5 @@ import org.scesi.domain.models.shared.ReportError
 import org.scesi.domain.models.shared.ReportResult
 
 interface ReportRepository {
-    suspend fun getReport(): ReportResult<List<Report>, ReportError>
+    suspend fun getAllReport(): ReportResult<List<Report>, ReportError>
 }
