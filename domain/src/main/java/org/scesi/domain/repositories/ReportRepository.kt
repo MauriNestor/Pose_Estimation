@@ -1,9 +1,9 @@
-package org.scesi.data.dataSources
+package org.scesi.domain.repositories
 
 import org.scesi.domain.models.reports.Report
 import org.scesi.domain.models.shared.ReportError
 import org.scesi.domain.models.shared.ReportResult
 
-interface ReportLocalDataSource {
-    suspend fun getReports(): ReportResult<List<Report>, ReportError>
+interface ReportRepository {
+    suspend fun getReport(): ReportResult<List<Report>, ReportError>
 }
