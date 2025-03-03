@@ -13,8 +13,8 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 class PoseDetector(context: Context) {
-    private lateinit var interpreter: Interpreter
-    private lateinit var inputTensor: ByteBuffer
+    private var interpreter: Interpreter
+    private var inputTensor: ByteBuffer
     private val inputSize = 256
     init {
         val modelFile = FileUtil.loadMappedFile(context, "movenet_thunder.tflite")

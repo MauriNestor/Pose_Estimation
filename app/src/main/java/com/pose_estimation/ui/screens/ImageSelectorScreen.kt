@@ -134,7 +134,26 @@ fun ImageSelectorContent(
                             )
                         }
                     }
+                    bodyConnections.forEach { (startPart, endPart) ->
+                        val start = keypoints.find { it.bodyPart == startPart && it.score > 0.5f }
+                        val end = keypoints.find { it.bodyPart == endPart && it.score > 0.5f }
+
+                        if (start != null && end != null) {
+                            val startX = start.x * scale.width + offset.x
+                            val startY = start.y * scale.height + offset.y
+                            val endX = end.x * scale.width + offset.x
+                            val endY = end.y * scale.height + offset.y
+
+                            drawLine(
+                                color = Color.Blue,
+                                start = Offset(startX, startY),
+                                end = Offset(endX, endY),
+                                strokeWidth = 4f
+                            )
+                        }
+                    }
                 }
+
 
             }
         }
