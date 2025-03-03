@@ -79,7 +79,20 @@ fun ImageSelectorContent(
     onTakePhoto: () -> Unit
 
 ) {
+    val bodyConnections = listOf(
+        Pair("nose", "left_eye"), Pair("nose", "right_eye"),
+        Pair("left_eye", "left_ear"), Pair("right_eye", "right_ear"),
+        Pair("left_shoulder", "right_shoulder"),
+        Pair("left_shoulder", "left_elbow"), Pair("right_shoulder", "right_elbow"),
+        Pair("left_elbow", "left_wrist"), Pair("right_elbow", "right_wrist"),
+        Pair("left_shoulder", "left_hip"), Pair("right_shoulder", "right_hip"),
+        Pair("left_hip", "right_hip"),
+        Pair("left_hip", "left_knee"), Pair("right_hip", "right_knee"),
+        Pair("left_knee", "left_ankle"), Pair("right_knee", "right_ankle")
+    )
+
     Column(
+
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
