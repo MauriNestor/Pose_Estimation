@@ -5,7 +5,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.pose_estimation.detector.PoseDetector
 import com.pose_estimation.ui.screens.ImageSelectorScreen
 import com.pose_estimation.ui.screens.home.HomeScreen
 import com.pose_estimation.ui.screens.PDFScreen
@@ -15,7 +14,6 @@ import com.pose_estimation.ui.screens.UserProfileScreen
 @Composable
 fun AppNavigation(
     navController: NavHostController,
-    poseDetector: PoseDetector
 ) {
     NavHost(
         navController = navController,
@@ -25,7 +23,7 @@ fun AppNavigation(
         pdfScreen(navController = navController)
         userProfile(navController = navController)
         settings(navController = navController)
-        imageSelector(navController = navController, poseDetector)
+        imageSelector(navController = navController)
     }
 }
 
@@ -45,6 +43,6 @@ private fun NavGraphBuilder.pdfScreen(navController: NavHostController) {
     composable<AppScreens.PDFScreen> { PDFScreen(navController) }
 }
 
-private fun NavGraphBuilder.imageSelector(navController: NavHostController, poseDetector: PoseDetector) {
-    composable<AppScreens.ImageSelectorScreen> { ImageSelectorScreen(navController, poseDetector) }
+private fun NavGraphBuilder.imageSelector(navController: NavHostController) {
+    composable<AppScreens.ImageSelectorScreen> { ImageSelectorScreen(navController) }
 }

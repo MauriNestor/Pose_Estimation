@@ -5,9 +5,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
-import com.pose_estimation.detector.PoseDetector
 import com.pose_estimation.ui.navigation.AppNavigation
 import com.pose_estimation.ui.screens.BottomNavigationBar
 import com.pose_estimation.ui.theme.Pose_EstimationTheme
@@ -18,9 +16,7 @@ fun PoseApp() {
     val appState = rememberPoseAppState()
     PoseScreen(navController = appState.navController) {
         AppNavigation(
-            navController = appState.navController,
-            poseDetector = PoseDetector(LocalContext.current)
-        )
+            navController = appState.navController)
     }
 }
 
