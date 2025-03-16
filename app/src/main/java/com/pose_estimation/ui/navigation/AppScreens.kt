@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 object AppScreens {
     @Serializable object HomeScreen
-    @Serializable object PDFScreen
+    @Serializable object ResultScreen
     @Serializable object UserProfileScreen
     @Serializable object SettingsScreen
     @Serializable object ImageSelectorScreen
