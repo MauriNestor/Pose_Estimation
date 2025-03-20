@@ -20,21 +20,21 @@ import com.pose_estimation.ui.theme.Pose_EstimationTheme
 fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
         AppScreens.HomeScreen,
-        AppScreens.PDFScreen,
+        AppScreens.ResultScreen,
         AppScreens.SettingsScreen,
         AppScreens.UserProfileScreen
     )
 
     val screenIcons = mapOf(
         AppScreens.HomeScreen to Icons.Filled.Home,
-        AppScreens.PDFScreen to Icons.Filled.AccountBox,
+        AppScreens.ResultScreen to Icons.Filled.AccountBox,
         AppScreens.SettingsScreen to Icons.Filled.Settings,
         AppScreens.UserProfileScreen to Icons.Filled.Person
     )
 
     val screenLabels = mapOf(
         AppScreens.HomeScreen to "Inicio",
-        AppScreens.PDFScreen to "Archivos",
+        AppScreens.ResultScreen to "Resultados",
         AppScreens.SettingsScreen to "Ajustes",
         AppScreens.UserProfileScreen to "Perfil"
     )
