@@ -38,7 +38,7 @@ import com.pose_estimation.ui.navigation.AppScreens
 @Composable
 fun HomeScreen(navController: NavHostController) {
         HomeScreenContent(onNavigate = {
-            navController.navigate(AppScreens.ResultScreen.route)
+            navController.navigate(AppScreens.ImageSelectorScreen.route)
         })
 }
 
