@@ -42,9 +42,9 @@ import com.pose_estimation.ui.screens.AppScaffold
 
 @Composable
 fun ResultScreen(navController: NavHostController) {
-    AppScaffold {
+//    AppScaffold {
         ResultScreenContent()
-    }
+//    }
 }
 
 @Composable

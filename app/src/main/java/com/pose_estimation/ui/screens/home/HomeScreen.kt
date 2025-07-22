@@ -37,11 +37,11 @@ import com.pose_estimation.ui.screens.AppScaffold
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    AppScaffold {
+//    AppScaffold {
         HomeScreenContent(onNavigate = {
             navController.navigate(AppScreens.ImageSelectorScreen)
         })
-    }
+//    }
 }
 
 @Composable
