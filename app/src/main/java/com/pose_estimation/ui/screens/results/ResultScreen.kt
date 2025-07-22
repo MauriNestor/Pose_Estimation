@@ -38,13 +38,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.pose_estimation.R
-import com.pose_estimation.ui.screens.AppScaffold
 
 @Composable
 fun ResultScreen(navController: NavHostController) {
-//    AppScaffold {
         ResultScreenContent()
-//    }
 }
 
 @Composable

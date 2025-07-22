@@ -55,10 +55,7 @@ import java.io.File
 
 @Composable
 fun ImageSelectorScreen(navController: NavHostController) {
-    AppScaffold {
         ImageSelectorScreenContent(navController)
-    }
-
 }
 
 @Composable

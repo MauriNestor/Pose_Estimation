@@ -12,9 +12,7 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun SettingsScreen(navController: NavHostController) {
-//    AppScaffold {
         SettingsScreenContent()
-//    }
 }
 
 @Composable

@@ -11,9 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun UserProfileScreen() {
-    AppScaffold {
         UserProfileScreenContent()
-    }
 }
 
 @Composable

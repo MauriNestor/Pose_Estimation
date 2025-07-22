@@ -33,15 +33,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.pose_estimation.ui.navigation.AppScreens
-import com.pose_estimation.ui.screens.AppScaffold
+
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-//    AppScaffold {
         HomeScreenContent(onNavigate = {
-            navController.navigate(AppScreens.ImageSelectorScreen)
+            navController.navigate(AppScreens.ResultScreen.route)
         })
-//    }
 }
 
 @Composable
