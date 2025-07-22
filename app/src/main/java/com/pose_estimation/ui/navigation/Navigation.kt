@@ -17,32 +17,42 @@ fun AppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = AppScreens.HomeScreen
-    ){
-        home(navController = navController)
-        result(navController = navController)
-        userProfile(navController = navController)
-        settings(navController = navController)
-        imageSelector(navController = navController)
+        startDestination = AppScreens.HomeScreen.route
+    ) {
+        home(navController)
+        result(navController)
+        userProfile(navController)
+        settings(navController)
+        imageSelector(navController)
     }
 }
 
 private fun NavGraphBuilder.home(navController: NavHostController) {
-    composable<AppScreens.HomeScreen> { HomeScreen(navController) }
+    composable(AppScreens.HomeScreen.route) {
+        HomeScreen(navController)
+    }
 }
 
 private fun NavGraphBuilder.userProfile(navController: NavHostController) {
-    composable<AppScreens.UserProfileScreen> { UserProfileScreen() }
+    composable(AppScreens.UserProfileScreen.route) {
+        UserProfileScreen()
+    }
 }
 
 private fun NavGraphBuilder.settings(navController: NavHostController) {
-    composable<AppScreens.SettingsScreen> { SettingsScreen(navController) }
+    composable(AppScreens.SettingsScreen.route) {
+        SettingsScreen(navController)
+    }
 }
 
 private fun NavGraphBuilder.result(navController: NavHostController) {
-    composable<AppScreens.ResultScreen> { ResultScreen(navController) }
+    composable(AppScreens.ResultScreen.route) {
+        ResultScreen(navController)
+    }
 }
 
 private fun NavGraphBuilder.imageSelector(navController: NavHostController) {
-    composable<AppScreens.ImageSelectorScreen> { ImageSelectorScreen(navController) }
+    composable(AppScreens.ImageSelectorScreen.route) {
+        ImageSelectorScreen(navController)
+    }
 }

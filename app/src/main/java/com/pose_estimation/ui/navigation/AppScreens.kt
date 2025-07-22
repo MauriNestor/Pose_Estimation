@@ -1,11 +1,11 @@
 package com.pose_estimation.ui.navigation
 
-import kotlinx.serialization.Serializable
+sealed class AppScreens(val route: String) {
+    object HomeScreen : AppScreens("home")
+    object ResultScreen : AppScreens("result")
+    object UserProfileScreen : AppScreens("userProfile")
+    object SettingsScreen : AppScreens("settings")
+    object ImageSelectorScreen : AppScreens("imageSelector")
+//    @Serializable @SerialName("result") object ResultScreen : AppScreens()
 
-object AppScreens {
-    @Serializable object HomeScreen
-    @Serializable object ResultScreen
-    @Serializable object UserProfileScreen
-    @Serializable object SettingsScreen
-    @Serializable object ImageSelectorScreen
 }
