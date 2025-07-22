@@ -47,10 +47,12 @@ fun BottomNavigationBar(navController: NavHostController) {
                 label = { Text(screenLabels[screen] ?: "Pantalla") },
                 selected = currentRoute == screen.toString(),
                 onClick = {
-                    if (currentRoute != screen.toString()) {
-                        navController.navigate(screen)
+                    val route = screen.route
+                    if (currentRoute != route) {
+                        navController.navigate(route)
                     }
                 }
+
             )
         }
     }
